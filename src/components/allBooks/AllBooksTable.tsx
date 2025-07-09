@@ -73,14 +73,14 @@ export default function AllBooksTable({
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-16 text-center">No.</TableHead>
-            <TableHead className="w-64 text-center">Title</TableHead>
-            <TableHead className="w-40 text-center">Author</TableHead>
-            <TableHead className="w-36 text-center">Genre</TableHead>
-            <TableHead className="w-36 text-center">ISBN</TableHead>
-            <TableHead className="w-20 text-center">Copies</TableHead>
-            <TableHead className="w-36 text-center">Availability</TableHead>
-            <TableHead className="text-center">Actions</TableHead>
+            <TableHead className=" text-center">No.</TableHead>
+            <TableHead className=" text-center">Title</TableHead>
+            <TableHead className=" text-center">Author</TableHead>
+            <TableHead className=" text-center">Genre</TableHead>
+            <TableHead className=" text-center">ISBN</TableHead>
+            <TableHead className=" text-center">Copies</TableHead>
+            <TableHead className=" text-center">Availability</TableHead>
+            <TableHead className="text-right pr-20">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -98,8 +98,8 @@ export default function AllBooksTable({
                 <TableCell className="text-center">
                   {book.available ? `Yes` : `No`}
                 </TableCell>
-                <TableCell className="text-center">
-                  <div className="flex gap-2">
+                <TableCell className="">
+                  <div className="flex gap-2 items-center justify-end">
                     <div>
                       <BookDetails book={book}></BookDetails>
                     </div>
