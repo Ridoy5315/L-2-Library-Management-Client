@@ -15,7 +15,7 @@ export default function BorrowSummary() {
           <h3 className='lg:text-4xl md:text-3xl text-2xl text-gray-400 font-semibold'>Borrowed Books Overview</h3>
           <p className='text-[#59b6e8] lg:font-bold md:font-bold font-medium uppercase lg:text-base md:text-sm text-xs'>-- Keep track of borrowed items, quantities --</p>
         </div>
-        <BorrowedBooksTable borrowedBooks={borrowedBooks.data} isLoading={isLoading}></BorrowedBooksTable>
+        <BorrowedBooksTable borrowedBooks={borrowedBooks?.data} isLoading={isLoading}></BorrowedBooksTable>
       </div>
     )
 }

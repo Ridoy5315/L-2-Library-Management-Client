@@ -30,8 +30,11 @@ interface AllBooksTableProps {
 export default function AllBooksTable({
   books,
   isLoading,
-  currentPage,
+  currentPage, 
 }: AllBooksTableProps) {
+
+  // Using the deleteBook mutation from the API slice
+  // This mutation will be used to delete a book when the user confirms the action
   const [deleteBook] = useDeleteBookMutation();
 
   interface DeleteBook {

@@ -19,8 +19,13 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import type { Book } from "@/interface/book.interface";
 
-export function BookDetails({ book }) {
+interface BookDetailsProps {
+  book: Book;
+}
+
+export function BookDetails({ book }: BookDetailsProps) {
   return (
     <Dialog>
         <TooltipProvider>

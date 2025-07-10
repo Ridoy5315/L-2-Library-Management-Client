@@ -21,8 +21,9 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import type { Book } from "@/interface/book.interface";
 
-export function EditBook({ book }) {
+export function EditBook({ book }: { book: Book }) {
   const [openEditBookModal, setOpenEditBookModal] = useState(false);
   const [formData, setFormData] = useState({
     title: "",

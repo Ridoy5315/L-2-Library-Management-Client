@@ -37,7 +37,16 @@ import { useCreateBorrowBookMutation } from "@/redux/api/baseApi";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
-export default function BorrowBook({ book }) {
+interface Book {
+  _id: string;
+  title: string;
+}
+
+interface BorrowBookProps {
+  book: Book;
+}
+
+export default function BorrowBook({ book }: BorrowBookProps) {
   const form = useForm();
   const navigate = useNavigate();
   const [openBorrowBookModal, setOpenBorrowBookModal] = useState(false);
