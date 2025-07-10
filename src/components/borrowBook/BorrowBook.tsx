@@ -58,7 +58,7 @@ export default function BorrowBook({ book }: BorrowBookProps) {
       book: book._id,
       ...data,
     };
-    console.log(borrowBookInfo);
+
     try {
       await createBorrowBook(borrowBookInfo).unwrap();
       Swal.fire({

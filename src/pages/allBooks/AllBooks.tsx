@@ -14,9 +14,6 @@ export default function AllBooks() {
   const total = data?.data?.total || 0;
   const totalPages = Math.ceil(total / 10);
 
-
-  console.log(total, totalPages);
-
   if (isLoading) {
     return <LoadingSpinner></LoadingSpinner>;
   }

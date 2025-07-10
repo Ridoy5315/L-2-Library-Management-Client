@@ -20,7 +20,6 @@ interface AllBooksTableControllerProps {
 
 export default function AllBooksTableController({ dispatch, totalPages, currentPage, isLoading }: AllBooksTableControllerProps) {
 
-  console.log(totalPages);
   return (
     isLoading ? (
       <p>Loading...</p>

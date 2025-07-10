@@ -22,6 +22,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import type { Book } from "@/interface/book.interface";
+import Swal from "sweetalert2";
 
 export function EditBook({ book }: { book: Book }) {
   const [openEditBookModal, setOpenEditBookModal] = useState(false);
@@ -36,14 +37,16 @@ export function EditBook({ book }: { book: Book }) {
 
   const [updateBook, { isLoading }] = useUpdateBookMutation();
 
-  const handleEditBook = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleEditBook = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     e.preventDefault();
     const { name, value } = e.target;
-    console.log(name, value);
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     const newInfoOfBook = {
       title: formData.title === "" ? book.title : formData.title,
       author: formData.author === "" ? book.author : formData.author,
@@ -64,17 +67,24 @@ export function EditBook({ book }: { book: Book }) {
       await updateBook({
         id: book._id,
         updateBookInfo: newInfoOfBook,
-      })
-        .unwrap()
-        .then((res) => {
-          if (res.success) {
-            alert("Book successfully updated");
-          } else {
-            alert("Failed to update book");
-          }
-        });
-    } catch (err) {
-      console.error("Update failed", err);
+      }).unwrap();
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Book successfully updated",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      setOpenEditBookModal(false);
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong.",
+        showConfirmButton: false,
+        timer: 4000,
+      });
+      console.error("Update failed", error);
     }
   };
   return (
@@ -91,7 +101,6 @@ export function EditBook({ book }: { book: Book }) {
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
-      
 
       <DialogContent className="lg:max-w-[700px] md:max-w-[600px] max-w-[425px]">
         <DialogHeader>
@@ -130,7 +139,7 @@ export function EditBook({ book }: { book: Book }) {
                 onChange={handleEditBook}
               />
             </div>
-            
+
             <div className="grid gap-3 col-span-3">
               <Label htmlFor="username-1">ISBN</Label>
               <Input

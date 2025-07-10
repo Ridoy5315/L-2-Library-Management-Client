@@ -13,7 +13,7 @@ interface BorrowedBooksTableProps {
   isLoading: boolean;
 }
 export default function BorrowedBooksTable({borrowedBooks, isLoading} :  BorrowedBooksTableProps) {
-     console.log(borrowedBooks)
+
   return (
     <Table>
       <TableHeader>
