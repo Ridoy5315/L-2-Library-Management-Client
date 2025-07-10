@@ -31,7 +31,7 @@ export default function AllBooksTableController({ dispatch, totalPages, currentP
             <PaginationPrevious
               onClick={currentPage === 1 ? undefined : () => dispatch(previous())}
               aria-disabled={currentPage === 1}
-              className={currentPage === 1 ? "pointer-events-none opacity-50 text-lg" : "text-lg"}
+              className={currentPage === 1 ? "pointer-events-none opacity-50 lg:text-lg md:text-base text-sm" : "lg:text-lg md:text-base text-sm"}
             />
           </PaginationItem>
           {Array.from({ length: totalPages }, (_, i) => (
@@ -39,7 +39,7 @@ export default function AllBooksTableController({ dispatch, totalPages, currentP
               <PaginationLink
                 onClick={() => dispatch(goToPage(i + 1))}
                 isActive={currentPage === i + 1}
-                className="cursor-pointer text-lg"
+                className="cursor-pointer lg:text-lg md:text-base text-xs"
               >
                 {i + 1}
               </PaginationLink>
@@ -49,7 +49,7 @@ export default function AllBooksTableController({ dispatch, totalPages, currentP
           <PaginationItem>
             <PaginationNext onClick={currentPage === totalPages ? undefined : () => dispatch(next())}
               aria-disabled={currentPage === totalPages}
-              className={currentPage === totalPages ? "pointer-events-none opacity-50 text-lg" : "text-lg"} />
+              className={currentPage === totalPages ? "pointer-events-none opacity-50 lg:text-lg md:text-base text-sm" : "lg:text-lg md:text-base text-sm"} />
           </PaginationItem>
         </PaginationContent>
       </Pagination>

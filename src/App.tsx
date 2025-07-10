@@ -16,7 +16,7 @@ function App() {
           <Banner></Banner>
         </section>
       )}
-      <section className="pt-20 pb-24">
+      <section className="pt-20 lg:pb-24 md:pb-20 pb-16">
         <Outlet></Outlet>
       </section>
       <section className="bg-gray-50 bg-opacity-85">
