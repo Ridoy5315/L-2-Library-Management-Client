@@ -4,7 +4,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const baseApi = createApi({
   reducerPath: "baseApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8000/api" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "https://library-management-server-kappa-eight.vercel.app/api" }),
   tagTypes: ["books", "borrows"],
   endpoints: (builder) => ({
     // Endpoints for books
@@ -45,7 +45,7 @@ export const baseApi = createApi({
     }),
     getBorrowedBooks: builder.query<GetBorrowedBooksResponse, void>({
       query: () => "/borrow-summary",
-      providesTags: ["borrows"],
+      providesTags: ["borrows", "books"],
     }),
   }),
 });

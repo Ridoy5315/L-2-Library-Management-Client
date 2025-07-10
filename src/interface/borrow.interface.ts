@@ -1,13 +1,12 @@
 export interface BorrowedBook {
-     // Add properties as per your BorrowedBook model
-     id: string;
-     bookId: string;
-     userId: string;
-     borrowedDate: string;
-     // ...other properties
+  book: {
+    title: string;
+    isbn: string;
+  };
+  totalQuantity: number;
 }
 
 export interface GetBorrowedBooksResponse {
-     borrowedBooks: BorrowedBook[];
-     // ...other properties if any
+  borrowedBooks: BorrowedBook[];
+  // ...other properties if any
 }

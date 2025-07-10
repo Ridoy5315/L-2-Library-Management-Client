@@ -16,17 +16,28 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { useState } from "react";
 import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useNavigate } from "react-router-dom";
 import { useCreateBookMutation } from "@/redux/api/baseApi";
 import Swal from "sweetalert2";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { Check, ChevronsUpDown } from "lucide-react";
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
 
 const genres = [
   { label: "FICTION", value: "FICTION" },
@@ -35,18 +46,35 @@ const genres = [
   { label: "HISTORY", value: "HISTORY" },
   { label: "BIOGRAPHY", value: "BIOGRAPHY" },
   { label: "FANTASY", value: "FANTASY" },
-] as const
+] as const;
 
-const AddBooks = () => {
+interface FetchBaseQueryError {
+  status: number | string;
+  data: {
+    error?: string;
+    message?: string;
+  };
+}
+
+type AddBooksProps = {
+  openAddBookModal?: boolean;
+  setOpenAddBookModal?: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const AddBooks = ({ openAddBookModal, setOpenAddBookModal }: AddBooksProps) => {
+  const [internalOpen, setInternalOpen] = useState(false);
+  const isControlled =
+    typeof openAddBookModal === "boolean" && setOpenAddBookModal;
+
+  const open = isControlled ? openAddBookModal : internalOpen;
+  const setOpen = isControlled ? setOpenAddBookModal! : setInternalOpen;
+
   const form = useForm();
   const navigate = useNavigate();
-  const [openAddBookModal, setOpenAddBookModal] = useState(false);
 
   const [createBookInfo, { isLoading }] = useCreateBookMutation();
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-
-     
     try {
       await createBookInfo(data).unwrap();
       Swal.fire({
@@ -56,28 +84,30 @@ const AddBooks = () => {
         showConfirmButton: false,
         timer: 1500,
       });
-      setOpenAddBookModal(false);
-      // form.reset();
+      form.reset();
+      setOpen(false);
       navigate("/");
     } catch (error) {
+      const err = error as FetchBaseQueryError;
       Swal.fire({
-        title: "Oops...",
-        text: "Something went wrong while adding the book.",
         icon: "error",
+        title: "Oops...",
+        text: err.data?.error || err.data?.message || "Something went wrong.",
+        showConfirmButton: false,
+        timer: 4000,
       });
-      console.error("Add book failed:", error);
     }
   };
 
   return (
-    <Dialog open={openAddBookModal} onOpenChange={setOpenAddBookModal}>
-      <DialogTrigger asChild>
-
-          <button className="hover:bg-[#d8f0fd] border-2 border-transparent hover:border-[#389acf] transition-all text-[#389acf] font-semibold py-1 px-3 rounded-md">Add Book</button>
-          {/* <Button variant="outline">Add Book</Button> */}
-
-      </DialogTrigger>
-
+    <Dialog open={open} onOpenChange={setOpen}>
+      {!isControlled && (
+        <DialogTrigger asChild>
+          <button className="hover:bg-[#d8f0fd] border-2 border-transparent hover:border-[#389acf] transition-all text-[#389acf] font-semibold py-1 px-3 rounded-md">
+            Add Book
+          </button>
+        </DialogTrigger>
+      )}
       <DialogContent className="lg:max-w-[700px] md:max-w-[600px] max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Add new book information</DialogTitle>

@@ -95,7 +95,7 @@ export function BookDetails({ book }: BookDetailsProps) {
             <div className="grid gap-3">
               <Label htmlFor="username-1">Available</Label>
               <Input
-                value={book.available}
+                value={book?.available ? "Yes" : "No"}
                 className="cursor-default pointer-events-none"
               />
             </div>

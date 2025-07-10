@@ -68,9 +68,9 @@ export default function BorrowBook({ book }: BorrowBookProps) {
         showConfirmButton: false,
         timer: 1500,
       });
-      setOpenBorrowBookModal(false);
       form.reset();
-      navigate("/borrowSummary");
+      setOpenBorrowBookModal(false);
+      navigate("/borrow-Summary");
     } catch (error) {
       Swal.fire({
         title: "Oops...",

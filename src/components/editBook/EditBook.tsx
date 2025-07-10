@@ -36,7 +36,7 @@ export function EditBook({ book }: { book: Book }) {
 
   const [updateBook, { isLoading }] = useUpdateBookMutation();
 
-  const handleEditBook = (e) => {
+  const handleEditBook = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     e.preventDefault();
     const { name, value } = e.target;
     console.log(name, value);
@@ -119,6 +119,7 @@ export function EditBook({ book }: { book: Book }) {
               />
             </div>
           </div>
+
           <div className="grid grid-cols-6 gap-2">
             <div className="grid gap-3 col-span-2">
               <Label htmlFor="name-1">Genre</Label>
@@ -129,6 +130,7 @@ export function EditBook({ book }: { book: Book }) {
                 onChange={handleEditBook}
               />
             </div>
+            
             <div className="grid gap-3 col-span-3">
               <Label htmlFor="username-1">ISBN</Label>
               <Input

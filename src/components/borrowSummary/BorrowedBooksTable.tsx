@@ -1,24 +1,15 @@
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
-type Borrow = {
-  book: {
-     title: string;
-     isbn: string;
-  };
-  totalQuantity: number;
-};
+import type { BorrowedBook } from "@/interface/borrow.interface";
 
 interface BorrowedBooksTableProps {
-  borrowedBooks: Borrow[];
+  borrowedBooks: BorrowedBook[];
   isLoading: boolean;
 }
 export default function BorrowedBooksTable({borrowedBooks, isLoading} :  BorrowedBooksTableProps) {

@@ -3,6 +3,7 @@ import AllBooksTable from "../../components/allBooks/AllBooksTable";
 import AllBooksTableController from "@/components/allBooks/AllBooksTableController";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import type { RootState } from "@/redux/store";
+import LoadingSpinner from "@/components/loadingSpinner/LoadingSpinner";
 
 export default function AllBooks() {
 
@@ -17,12 +18,12 @@ export default function AllBooks() {
   console.log(total, totalPages);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <LoadingSpinner></LoadingSpinner>;
   }
 
   return (
     <div className="w-11/12 mx-auto">
-      {isLoading ? <p>Loading...</p> : (
+      {isLoading ? <LoadingSpinner></LoadingSpinner> : (
         <>
         <div className="lg:w-6/12 md:w-7/12 w-9/12 mx-auto text-center lg:space-y-2 md:space-y-2 mb-8">
           <h3 className='lg:text-4xl md:text-3xl text-2xl text-gray-400 font-semibold'>Find Your Next Read</h3>
