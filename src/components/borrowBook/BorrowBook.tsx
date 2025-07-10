@@ -17,6 +17,14 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
@@ -40,7 +48,7 @@ export default function BorrowBook({ book }) {
     const borrowBookInfo = {
       book: book._id,
       ...data,
-    }
+    };
     console.log(borrowBookInfo);
     try {
       await createBorrowBook(borrowBookInfo).unwrap();
@@ -60,27 +68,38 @@ export default function BorrowBook({ book }) {
         text: "Something went wrong while borrowing the book.",
         icon: "error",
       });
-      
+
       console.error("Borrow failed:", error);
     }
   };
 
   return (
     <Dialog open={openBorrowBookModal} onOpenChange={setOpenBorrowBookModal}>
-      <DialogTrigger asChild>
-        <Button variant="ghost" className="border p-2">
-          <img className="w-6" src={borrowBooksIcon} alt="" />
-        </Button>
-      </DialogTrigger>
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger>
+            <DialogTrigger asChild>
+              <img
+                className="lg:w-7 md:w-6 w-4 cursor-pointer"
+                src={borrowBooksIcon}
+                alt=""
+              />
+            </DialogTrigger>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Borrow this book</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
 
-      <DialogContent className="sm:max-w-[600px]">
+      <DialogContent className="lg:max-w-[600px] md:max-w-[600px] max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Borrow '{book.title}' book</DialogTitle>
+          <DialogTitle className="text-center">Borrow '{book.title}' book</DialogTitle>
         </DialogHeader>
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <div className="grid grid-cols-6 gap-2">
+            <div className="flex items-center justify-evenly gap-4">
               <div className="grid gap-3">
                 <FormField
                   control={form.control}
@@ -89,10 +108,7 @@ export default function BorrowBook({ book }) {
                     <FormItem>
                       <FormLabel>Quantity</FormLabel>
                       <FormControl>
-                        <Input
-                          {...field}
-                          value={field.value || ""}
-                        />
+                        <Input {...field} placeholder="quantity" value={field.value || ""} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -132,7 +148,6 @@ export default function BorrowBook({ book }) {
                             mode="single"
                             selected={field.value}
                             onSelect={field.onChange}
-                            
                             captionLayout="dropdown"
                           />
                         </PopoverContent>

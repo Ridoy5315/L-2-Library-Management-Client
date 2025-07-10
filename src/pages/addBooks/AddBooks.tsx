@@ -78,7 +78,7 @@ const AddBooks = () => {
 
       </DialogTrigger>
 
-      <DialogContent className="sm:max-w-[700px]">
+      <DialogContent className="lg:max-w-[700px] md:max-w-[600px] max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Add new book information</DialogTitle>
         </DialogHeader>

@@ -15,6 +15,13 @@ import { Textarea } from "../ui/textarea";
 import { useState } from "react";
 import { useUpdateBookMutation } from "@/redux/api/baseApi";
 
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+
 export function EditBook({ book }) {
   const [openEditBookModal, setOpenEditBookModal] = useState(false);
   const [formData, setFormData] = useState({
@@ -71,13 +78,21 @@ export function EditBook({ book }) {
   };
   return (
     <Dialog open={openEditBookModal} onOpenChange={setOpenEditBookModal}>
-      <DialogTrigger asChild>
-        <Button variant="outline">
-          <CiEdit></CiEdit>
-        </Button>
-      </DialogTrigger>
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger>
+            <DialogTrigger asChild>
+              <CiEdit className="lg:text-2xl md:text-xl text-sm "></CiEdit>
+            </DialogTrigger>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Edit book information</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+      
 
-      <DialogContent className="sm:max-w-[600px]">
+      <DialogContent className="lg:max-w-[700px] md:max-w-[600px] max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Edit '{book.title}' book</DialogTitle>
         </DialogHeader>
@@ -143,7 +158,9 @@ export function EditBook({ book }) {
 
           <DialogFooter>
             <DialogClose asChild>
-              <Button variant="outline" type="button">Cancel</Button>
+              <Button variant="outline" type="button">
+                Cancel
+              </Button>
             </DialogClose>
             <Button type="submit" disabled={isLoading}>
               {isLoading ? "Updating..." : "Update Book"}

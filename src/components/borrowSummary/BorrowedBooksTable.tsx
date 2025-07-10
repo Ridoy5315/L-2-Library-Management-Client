@@ -25,32 +25,24 @@ export default function BorrowedBooksTable({borrowedBooks, isLoading} :  Borrowe
      console.log(borrowedBooks)
   return (
     <Table>
-      <TableCaption>A list of books that have been borrowed</TableCaption>
       <TableHeader>
-        <TableRow>
-          <TableHead className="w-16 text-center">No.</TableHead>
-          <TableHead className="w-64 text-center">Title</TableHead>
-          <TableHead className="w-36 text-center">ISBN</TableHead>
-          <TableHead className="w-20 text-center">Total Quantity</TableHead>
+        <TableRow className="text-xs lg:text-base md:text-sm bg-gray-100">
+          <TableHead className=" text-center">No.</TableHead>
+          <TableHead className=" text-center">Title</TableHead>
+          <TableHead className=" text-center">ISBN</TableHead>
+          <TableHead className="text-right lg:pr-28 md:pr-20 ">Total Quantity</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {!isLoading && borrowedBooks.map((borrowedBook, index) => (
-          <TableRow key={index}>
+          <TableRow key={index} className="text-xs lg:text-sm md:text-sm even:bg-[#e9f2f7] hover:bg-[#d8f0fd]">
             <TableCell className="text-center">{index + 1}</TableCell>
             <TableCell className="text-center">{borrowedBook.book.title}</TableCell>
             <TableCell className="text-center">{borrowedBook.book.isbn}</TableCell>
-            <TableCell className="text-center">{borrowedBook.totalQuantity}</TableCell>
-            {/* <TableCell className="text-right">{book.totalAmount}</TableCell> */}
+            <TableCell className="text-right lg:pr-36 md:pr-28 pr-10">{borrowedBook.totalQuantity}</TableCell>
           </TableRow>
         ))}
       </TableBody>
-      <TableFooter>
-        <TableRow>
-          <TableCell colSpan={3}>Total</TableCell>
-          <TableCell className="text-right">$2,500.00</TableCell>
-        </TableRow>
-      </TableFooter>
     </Table>
   )
 }

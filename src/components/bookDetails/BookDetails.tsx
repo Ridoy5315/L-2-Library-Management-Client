@@ -13,16 +13,30 @@ import { Label } from "@/components/ui/label";
 import { CgDetailsMore } from "react-icons/cg";
 import { Textarea } from "../ui/textarea";
 
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+
 export function BookDetails({ book }) {
   return (
     <Dialog>
-      <form>
-        <DialogTrigger asChild>
-          <Button variant="outline">
-            <CgDetailsMore></CgDetailsMore>
-          </Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[725px]">
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger>
+              <DialogTrigger asChild>
+                <CgDetailsMore className="cursor-pointer lg:text-2xl md:text-xl text-sm text-[#59b6e8]"></CgDetailsMore>
+              </DialogTrigger>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Book details information</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+
+        <DialogContent className="lg:max-w-[700px] md:max-w-[600px] max-w-[425px]">
           <DialogHeader>
             <DialogTitle>'{book.title}' book Details information</DialogTitle>
           </DialogHeader>
@@ -60,7 +74,10 @@ export function BookDetails({ book }) {
           </div>
           <div className="grid w-full gap-3">
             <Label htmlFor="message">Description</Label>
-            <Textarea value={book.description} className="cursor-default pointer-events-none" />
+            <Textarea
+              value={book.description}
+              className="cursor-default pointer-events-none"
+            />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="grid gap-3">
@@ -78,14 +95,13 @@ export function BookDetails({ book }) {
               />
             </div>
           </div>
-          
+
           <DialogFooter>
             <DialogClose asChild>
               <Button variant="outline">Cancel</Button>
             </DialogClose>
           </DialogFooter>
         </DialogContent>
-      </form>
     </Dialog>
   );
 }
